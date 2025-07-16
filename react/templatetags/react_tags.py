@@ -32,7 +32,7 @@ def react_static(filename):
 ''', domain, host, host, filename)
         return res
 
-    manifest_file = settings.STATIC_ROOT / 'react/.vite/manifest.json'
+    manifest_file = settings.STATIC_ROOT / 'react/manifest.json'
     with open(manifest_file, 'r') as f:
         res = json.loads(f.read())
 
