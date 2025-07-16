@@ -32,11 +32,11 @@ def react_static(filename):
 ''', domain, host, host, filename)
         return res
 
-    manifest_file = settings.BASE_DIR / 'static/dist/manifest.json'
+    manifest_file = settings.STATIC_ROOT / 'react/.vite/manifest.json'
     with open(manifest_file, 'r') as f:
         res = json.loads(f.read())
 
-    base_url = f'{settings.STATIC_URL}dist/'
+    base_url = f'{settings.STATIC_URL}react/'
     html_string = format_html('<script type="module" src="{}{}"></script>',
                      base_url, res[filename]['file'])
 
@@ -50,5 +50,3 @@ def react_static(filename):
 
     cache.set(filename, html_string, 60)
     return html_string
-
-
