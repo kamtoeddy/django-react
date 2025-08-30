@@ -16,7 +16,7 @@ def react_static(filename):
         return cache_res
 
     if settings.DEBUG:
-        domain = 'localhost'
+        domain = getattr(settings, 'DOMAIN', 'localhost')
         host = f'http://{domain}:5173/'
         res = format_html('''
   <script type="module">
