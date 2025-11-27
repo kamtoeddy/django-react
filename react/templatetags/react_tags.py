@@ -38,8 +38,8 @@ def react_static(filename):
     # else:
     #     # Get from remote storage
     from django.contrib.staticfiles.storage import staticfiles_storage
-    res = staticfiles_storage.open(manifest_file)
-    res = json.load(res)
+    with staticfiles_storage.open(manifest_file, "r") as fp:
+        res = json.load(fp)
 
     base_url = f'{settings.STATIC_URL}react/'
     html_string = format_html('<script type="module" src="{}{}"></script>',
