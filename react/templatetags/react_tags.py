@@ -31,10 +31,14 @@ def react_static(filename):
   <script type="module" src="{}{}"></script>
 ''', domain, host, host, filename)
         return res
-
-    manifest_file = settings.STATIC_ROOT / 'react/manifest.json'
-    with open(manifest_file, 'r') as f:
-        res = json.loads(f.read())
+    manifest_file = 'react/manifest.json'
+    # if settings.ENVIRONMENT == "local":
+    #     with open(settings.STATIC_ROOT / manifest_file, 'r') as f:
+    #         res = json.loads(f.read())
+    # else:
+    #     # Get from remote storage
+    from django.contrib.staticfiles.storage import staticfiles_storage
+    res = staticfiles_storage.open(manifest_file).read()
 
     base_url = f'{settings.STATIC_URL}react/'
     html_string = format_html('<script type="module" src="{}{}"></script>',
